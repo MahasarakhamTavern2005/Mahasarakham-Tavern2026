@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>เมนูอาหาร | โรงเหล้ามหาสารคาม</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    font-family:'Mali',cursive;
+}
+
+body{
+    background:#111;
+    margin:0;
+    padding:0;
+}
+
+/* Navbar */
+
+.navbar{
+
+background:#1f1f1f;
+
+}
+
+.navbar-brand{
+
+font-size:28px;
+
+font-weight:bold;
+
+color:#F9A602 !important;
+
+}
+
+.nav-link{
+
+color:white !important;
+
+font-size:18px;
+
+margin-left:15px;
+
+}
+
+.nav-link:hover{
+
+color:#F9A602 !important;
+
+}
+
+/* Hero */
+
+.hero{
+    
+
+    background-image:
+        linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+        url("images/aok04.jpg");
+
+background-size: contain;
+background-position: center center;
+background-repeat: no-repeat;
+background-color: #000;
+
+    height: 1000px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    color:white;
+
+}
+
+.hero h1{
+
+font-size:40px;
+
+font-weight:bold;
+
+text-shadow:0 0 20px black;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+}
+
+/* Search */
+
+.search-box{
+
+margin-top:-40px;
+
+position:relative;
+
+z-index:10;
+
+}
+
+.search-box input{
+
+height:60px;
+
+border-radius:50px;
+
+font-size:20px;
+
+padding-left:30px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+/* Category */
+
+.category{
+
+text-align:center;
+
+padding:40px 0;
+
+}
+
+.category button{
+
+margin:8px;
+
+border-radius:50px;
+
+padding:10px 25px;
+
+font-size:18px;
+
+transition:.3s;
+
+}
+
+.category .active{
+
+background:#F9A602;
+
+color:black;
+
+border:none;
+
+}
+
+.category button:hover{
+
+background:#F9A602;
+
+color:black;
+
+}
+
+/* Card */
+
+.food-card{
+
+transition:.35s;
+
+border:none;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+}
+
+.food-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+.food-card img{
+
+height:240px;
+
+object-fit:cover;
+
+transition:.4s;
+
+}
+
+.food-card:hover img{
+
+transform:scale(1.08);
+
+}
+
+.food-card h5{
+
+font-size:24px;
+
+font-weight:bold;
+
+}
+
+.price{
+
+color:#F9A602;
+
+font-size:30px;
+
+font-weight:bold;
+
+}
+
+.btn-order{
+
+background:#F9A602;
+
+border:none;
+
+width:100%;
+
+font-size:20px;
+
+border-radius:40px;
+
+padding:12px;
+
+transition:.3s;
+
+}
+
+.btn-order:hover{
+
+background:#d98c00;
+
+transform:scale(1.04);
+
+}
+
+.badge-hot{
+
+position:absolute;
+
+top:15px;
+
+left:15px;
+
+background:red;
+
+font-size:15px;
+
+}
+
+/* Footer */
+
+footer{
+
+background:#1f1f1f;
+
+color:white;
+
+text-align:center;
+
+padding:30px;
+
+margin-top:80px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg">
+
+<div class="container">
+
+<a class="navbar-brand" href="index.html">
+
+🍺 โรงเหล้ามหาสารคาม
+
+</a>
+
+<button class="navbar-toggler"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse"
+id="menu">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">หน้าแรก</a>
+
+</li>
+
+<li class="nav-item">
+
+
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div class="container">
+
+
+</div>
+
+</section>
+
+<!-- Search -->
+
+
+
+<!-- Category -->
+
+
+<!-- Menu -->
+
+<div class="container">
+
+<div class="row" id="menu-list">
+    <!-- เมนูที่ 1 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4 menu-item"
+data-category="ย่าง">
+    <div class="card food-card position-relative">
+        <img src="images/A1.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>สแกนคิวอาร์โค้ด</h5>
+            <h7>เพื่อทำการจองโต๊ะ</h7>
+            <div class="price">ทักมาได้เลยค้าบบ</div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ปุ่มเลื่อนขึ้นบน -->
+<button id="topBtn" class="btn btn-warning rounded-circle"
+style="position:fixed;bottom:20px;right:20px;width:55px;height:55px;display:none;z-index:999;">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- Footer -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+//==========================
+// ค้นหาเมนู
+//==========================
+
+const search=document.getElementById("search");
+
+search.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+let cards=document.querySelectorAll(".food-card");
+
+cards.forEach(function(card){
+
+let text=card.innerText.toLowerCase();
+
+card.parentElement.style.display=text.includes(value)
+? "block"
+: "none";
+
+});
+
+});
+
+//==========================
+// Scroll Top
+//==========================
+
+const topBtn=document.getElementById("topBtn");
+
+window.addEventListener("scroll",function(){
+
+if(window.scrollY>300){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
+
+});
+
+topBtn.onclick=function(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+//==========================
+// Hover Effect
+//==========================
+
+document.querySelectorAll(".food-card").forEach(function(card){
+
+card.addEventListener("mouseenter",function(){
+
+card.style.transform="translateY(-12px)";
+
+});
+
+card.addEventListener("mouseleave",function(){
+
+card.style.transform="translateY(0px)";
+
+});
+
+});
+
+//==========================
+// Category Button
+//==========================
+
+let buttons=document.querySelectorAll(".category button");
+
+buttons.forEach(function(btn){
+
+btn.addEventListener("click",function(){
+
+buttons.forEach(function(b){
+
+b.classList.remove("active");
+
+});
+
+this.classList.add("active");
+
+});
+
+});
+
+//==========================
+// ปุ่มสั่งอาหาร
+//==========================
+
+document.querySelectorAll(".btn-order").forEach(function(btn){
+
+btn.onclick=function(){
+
+let menu=this.parentElement.querySelector("h5").innerText;
+
+alert("✅ เพิ่ม '"+menu+"' ลงในรายการเรียบร้อย");
+
+};
+
+});
+
+//==========================
+// Animation ตอนเลื่อน
+//==========================
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity="1";
+
+entry.target.style.transform="translateY(0px)";
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".food-card").forEach(card=>{
+
+card.style.opacity="0";
+
+card.style.transform="translateY(40px)";
+
+card.style.transition=".6s";
+
+observer.observe(card);
+
+});
+
+</script>
+
+</body>
+</html>

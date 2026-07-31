@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>บิล</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-dark text-white">
+
+<div class="container mt-5">
+
+<h2>🧾 บิลของฉัน</h2>
+
+<table class="table table-dark">
+
+<thead>
+
+    <li class="nav-item">
+
+<a class="nav-link" href="../index.html">หน้าแรก</a>
+<a class="nav-link" href="menu.html">อาหาร</a>
+<a class="nav-link" href="oak.html">เครื่องดื่ม</a>
+<a class="nav-link" href="mot.html">โปรโมชั่น</a>
+
+</li>
+
+<li class="nav-item">
+<tr>
+    <th>เมนู</th>
+    <th>จำนวน</th>
+    <th>ราคา/หน่วย</th>
+    <th>รวม</th>
+    <th>จัดการ</th>
+</tr>
+
+</thead>
+
+<tbody id="list"></tbody>
+
+</table>
+
+<h3>
+
+รวม
+
+<span id="total">
+
+0
+
+</span>
+
+บาท
+
+</h3>
+<hr>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+
+        <label class="form-label">
+            เลขโต๊ะ
+        </label>
+
+        <input
+        type="number"
+        id="tableNo"
+        class="form-control"
+        placeholder="เช่น 12">
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+
+        <label class="form-label">
+            ชื่อ
+        </label>
+
+        <input
+        type="number"
+        id="tableNo"
+        class="form-control"
+        placeholder="เช่น คุณเอ">
+
+    </div>
+
+</div>
+
+
+<div class="mt-4">
+
+    <button
+    class="btn btn-success btn-lg"
+    onclick="confirmBill()">
+
+        ✅ ยืนยันการสั่งบิล
+
+    </button>
+<div id="billPage"></div>
+</div>
+
+<script>
+    
+</script>
+
+<script>
+
+function confirmBill(){
+
+    let table = document.getElementById("tableNo").value;
+
+    if(table==""){
+        alert("กรุณากรอกเลขโต๊ะ");
+        return;
+    }
+
+    // ซ่อนปุ่มก่อนแคป (ถ้าต้องการ)
+    const btn = document.querySelector(".btn-success");
+    btn.style.display = "none";
+
+    html2canvas(document.querySelector(".container"),{
+
+        scale:3,
+        useCORS:true,
+        backgroundColor:"#1b1b1b"
+
+    }).then(function(canvas){
+
+        // แสดงปุ่มกลับ
+        btn.style.display = "inline-block";
+
+        let link = document.createElement("a");
+
+        link.download = "โต๊ะ-"+table+".png";
+
+        link.href = canvas.toDataURL("image/png");
+
+        link.click();
+
+        alert("บันทึกภาพเรียบร้อย");
+
+    });
+
+}
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function renderCart(){
+
+    let html="";
+    let total=0;
+
+    cart.forEach((item,index)=>{
+
+        if(!item.qty){
+            item.qty=1;
+        }
+
+        total += item.price * item.qty;
+
+        html += `
+        <tr>
+
+            <td>${item.name}</td>
+
+            <td>
+
+                <button class="btn btn-danger btn-sm"
+                onclick="minus(${index})">-</button>
+
+                <span class="mx-2">${item.qty}</span>
+
+                <button class="btn btn-success btn-sm"
+                onclick="plus(${index})">+</button>
+
+            </td>
+
+            <td>${item.price}</td>
+
+            <td>${item.price * item.qty}</td>
+
+            <td>
+
+                <button class="btn btn-warning btn-sm"
+                onclick="removeItem(${index})">
+
+                ลบ
+
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("list").innerHTML=html;
+
+    document.getElementById("total").innerHTML=total;
+
+    localStorage.setItem("cart",JSON.stringify(cart));
+
+}
+
+function plus(i){
+
+    cart[i].qty++;
+
+    renderCart();
+
+}
+
+function minus(i){
+
+    if(cart[i].qty>1){
+
+        cart[i].qty--;
+
+    }
+
+    renderCart();
+
+}
+
+function removeItem(i){
+
+    cart.splice(i,1);
+
+    renderCart();
+
+}
+
+renderCart();
+
+</script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+
+document.getElementById("downloadBtn").onclick=function(){
+
+    html2canvas(document.getElementById("billPaper"),{
+
+        scale:4
+
+    }).then(function(canvas){
+
+        let link=document.createElement("a");
+
+        link.download="ใบสั่งอาหาร.png";
+
+        link.href=canvas.toDataURL();
+
+        link.click();
+
+    });
+
+}
+
+document.getElementById("printBtn").onclick=function(){
+
+    window.print();
+
+}
+
+</script>
+<!-- Modal แสดงใบสั่งอาหาร -->
+<div class="modal fade" id="billModal" tabindex="-1">
+
+    <div class="modal-dialog modal-xl">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-dark text-white">
+
+                <h4 class="modal-title">
+                    🧾 ตัวอย่างใบสั่งอาหาร
+                </h4>
+
+                <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body bg-light">
+
+                <!-- พื้นที่สร้างใบสั่งอาหาร -->
+                <div id="billPaper">
+
+                    <!-- เดี๋ยวส่วนที่ 4 จะสร้างบิลจริงตรงนี้ -->
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                class="btn btn-success"
+                id="downloadBtn">
+
+                    📥 ดาวน์โหลด PNG
+
+                </button>
+
+                <button
+                class="btn btn-primary"
+                id="printBtn">
+
+                    🖨 พิมพ์
+
+                </button>
+
+                <button
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">
+
+                    ปิด
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+
+</html>

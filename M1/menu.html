@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>เมนูอาหาร | โรงเหล้ามหาสารคาม</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    font-family:'Mali',cursive;
+}
+
+body{
+
+    background:#f8f8f8;
+
+}
+
+/* Navbar */
+
+.navbar{
+
+background:#1f1f1f;
+
+}
+
+.navbar-brand{
+
+font-size:28px;
+
+font-weight:bold;
+
+color:#F9A602 !important;
+
+}
+
+.nav-link{
+
+color:white !important;
+
+font-size:18px;
+
+margin-left:15px;
+
+}
+
+.nav-link:hover{
+
+color:#F9A602 !important;
+
+}
+
+/* Hero */
+
+.hero{
+
+    background-image:
+        linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+        url("images/aok01.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    height:500px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    color:white;
+
+}
+
+.hero h1{
+
+font-size:60px;
+
+font-weight:bold;
+
+text-shadow:0 0 20px black;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+}
+
+/* Search */
+
+.search-box{
+
+margin-top:-40px;
+
+position:relative;
+
+z-index:10;
+
+}
+
+.search-box input{
+
+height:60px;
+
+border-radius:50px;
+
+font-size:20px;
+
+padding-left:30px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+/* Category */
+
+.category{
+
+text-align:center;
+
+padding:40px 0;
+
+}
+
+.category button{
+
+margin:8px;
+
+border-radius:50px;
+
+padding:10px 25px;
+
+font-size:18px;
+
+transition:.3s;
+
+}
+
+.category .active{
+
+background:#F9A602;
+
+color:black;
+
+border:none;
+
+}
+
+.category button:hover{
+
+background:#F9A602;
+
+color:black;
+
+}
+
+/* Card */
+
+.food-card{
+
+transition:.35s;
+
+border:none;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+}
+
+.food-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+.food-card img{
+
+height:240px;
+
+object-fit:cover;
+
+transition:.4s;
+
+}
+
+.food-card:hover img{
+
+transform:scale(1.08);
+
+}
+
+.food-card h5{
+
+font-size:24px;
+
+font-weight:bold;
+
+}
+
+.price{
+
+color:#F9A602;
+
+font-size:30px;
+
+font-weight:bold;
+
+}
+
+.btn-order{
+
+background:#F9A602;
+
+border:none;
+
+width:100%;
+
+font-size:20px;
+
+border-radius:40px;
+
+padding:12px;
+
+transition:.3s;
+
+}
+
+.btn-order:hover{
+
+background:#d98c00;
+
+transform:scale(1.04);
+
+}
+
+.badge-hot{
+
+position:absolute;
+
+top:15px;
+
+left:15px;
+
+background:red;
+
+font-size:15px;
+
+}
+
+/* Footer */
+
+footer{
+
+background:#1f1f1f;
+
+color:white;
+
+text-align:center;
+
+padding:30px;
+
+margin-top:80px;
+
+}
+
+.success-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.45);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:99999;
+}
+
+.success-overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.success-circle{
+    width:220px;
+    height:220px;
+    background:#38d64a;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:120px;
+    transform:scale(.4);
+    transition:.3s;
+}
+
+.success-overlay.show .success-circle{
+    transform:scale(1);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg">
+
+<div class="container">
+
+<a class="navbar-brand" href="index.html">
+
+🍺 โรงเหล้ามหาสารคาม
+
+</a>
+
+<button class="navbar-toggler"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse"
+id="menu">
+
+<ul class="navbar-nav ms-auto"></ul>
+<li class="nav-item">
+    <a class="nav-link" href="bill.html">
+        🧾 บิลของฉัน
+    </a>
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="../index.html">หน้าแรก</a>
+
+</li>
+
+<li class="nav-item">
+
+
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div class="container">
+
+<h1>
+
+🍽 เมนูอาหาร
+
+</h1>
+
+<p>
+
+อร่อยทุกจาน คัดสรรวัตถุดิบสดใหม่
+
+</p>
+
+</div>
+
+</section>
+
+<!-- Search -->
+
+<div class="container search-box">
+
+<input
+
+type="text"
+
+class="form-control"
+
+placeholder="🔍 ค้นหาเมนูอาหาร..."
+
+id="search">
+
+</div>
+
+<!-- Category -->
+
+
+<!-- Menu -->
+
+<div class="container">
+
+<div class="row" id="menu-list">
+    <!-- เมนูที่ 1 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4 menu-item"
+data-category="ย่าง">
+    <div class="card food-card position-relative">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food1.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>คอหมูย่าง</h5>
+            <div class="price">149 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('คอหมูย่าง',149)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4 menu-item"
+data-category="ย่าง">
+    <div class="card food-card">
+        <img src="images/food2.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>เสือร้องไห้</h5>
+            <div class="price">169 บาท</div>
+                       <button
+class="btn btn-warning"
+onclick="addCart('เสือร้องไห้',169)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4 menu-item"
+data-category="ย่าง">
+    <div class="card food-card">
+        <img src="images/food3.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>หมูแดดเดียว</h5>
+            <div class="price">129 บาท</div>
+                        <button
+class="btn btn-warning"
+onclick="addCart('หมูแดดเดียว',129)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food4.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>เนื้อย่าง</h5>
+            <div class="price">199 บาท</div>
+                        <button
+class="btn btn-warning"
+onclick="addCart('เนื้อย่าง',199)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food5.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>ลาบหมู</h5>
+            <div class="price">119 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ลาบหมู',119)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food6.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>ลาบเนื้อ</h5>
+            <div class="price">139 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ลาบเนื้อ',139)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food7.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>น้ำตกหมู</h5>
+            <div class="price">119 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('น้ำตกหมู',119)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food8.jpg" class="card-img-top">
+        <div class="card-body text-center">
+            <h5>ตับหวาน</h5>
+            <div class="price">129 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ตับหวาน',129)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+<!-- เมนูที่ 21 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food21.jpg" class="card-img-top" alt="ส้มตำไทย">
+        <div class="card-body text-center">
+            <h5>ส้มตำไทย</h5>
+            <div class="price">79 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ส้มตำไทย',79)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food22.jpg" class="card-img-top" alt="ตำปูปลาร้า">
+        <div class="card-body text-center">
+            <h5>ตำปูปลาร้า</h5>
+            <div class="price">89 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ตำปูปลาร้า',89)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food23.jpg" class="card-img-top" alt="ตำทะเล">
+        <div class="card-body text-center">
+            <h5>ตำทะเล</h5>
+            <div class="price">159 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ตำทะเล',159)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food24.jpg" class="card-img-top" alt="ตำข้าวโพด">
+        <div class="card-body text-center">
+            <h5>ตำข้าวโพด</h5>
+            <div class="price">99 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ตำข้าวโพด',99)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- เมนูที่ 25 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food25.jpg" class="card-img-top" alt="ไก่ทอดน้ำปลา">
+        <div class="card-body text-center">
+            <h5>ไก่ทอดน้ำปลา</h5>
+            <div class="price">139 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ไก่ทอดน้ำปลา',139)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food26.jpg" class="card-img-top" alt="เอ็นไก่ทอด">
+        <div class="card-body text-center">
+            <h5>เอ็นไก่ทอด</h5>
+            <div class="price">119 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('เอ็นไก่ทอด',119)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food27.jpg" class="card-img-top" alt="ปีกไก่ทอด">
+        <div class="card-body text-center">
+            <h5>ปีกไก่ทอด</h5>
+            <div class="price">129 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ปีกไก่ทอด',129)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food28.jpg" class="card-img-top" alt="เฟรนช์ฟรายส์">
+        <div class="card-body text-center">
+            <h5>เฟรนช์ฟรายส์</h5>
+            <div class="price">99 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('เฟรนช์ฟรายส์',99)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- เมนูที่ 29 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food29.jpg" class="card-img-top" alt="ต้มแซ่บกระดูกอ่อน">
+        <div class="card-body text-center">
+            <h5>ต้มแซ่บกระดูกอ่อน</h5>
+            <div class="price">149 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ต้มแซ่บกระดูกอ่อน',149)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food30.jpg" class="card-img-top" alt="ต้มยำทะเล">
+        <div class="card-body text-center">
+            <h5>ต้มยำทะเล</h5>
+            <div class="price">189 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ต้มยำทะเล',189)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food31.jpg" class="card-img-top" alt="แกงอ่อมหมู">
+        <div class="card-body text-center">
+            <h5>แกงอ่อมหมู</h5>
+            <div class="price">139 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('แกงอ่อมหมู',139)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food32.jpg" class="card-img-top" alt="ต้มโคล้ง">
+        <div class="card-body text-center">
+            <h5>ต้มโคล้ง</h5>
+            <div class="price">149 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ต้มโคล้ง',149)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- เมนูที่ 33 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food33.jpg" class="card-img-top" alt="ข้าวผัดหมู">
+        <div class="card-body text-center">
+            <h5>ข้าวผัดหมู</h5>
+            <div class="price">89 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ข้าวผัดหมู',89)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food34.jpg" class="card-img-top" alt="ข้าวผัดทะเล">
+        <div class="card-body text-center">
+            <h5>ข้าวผัดทะเล</h5>
+            <div class="price">109 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ข้าวผัดทะเล',109)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food35.jpg" class="card-img-top" alt="ข้าวกะเพราหมูกรอบ">
+        <div class="card-body text-center">
+            <h5>ข้าวกะเพราหมูกรอบ</h5>
+            <div class="price">99 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ข้าวกะเพราหมูกรอบ',99)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food36.jpg" class="card-img-top" alt="ข้าวไข่เจียว">
+        <div class="card-body text-center">
+            <h5>ข้าวไข่เจียว</h5>
+            <div class="price">69 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ข้าวไข่เจียว',69)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- เมนูที่ 37 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food37.jpg" class="card-img-top" alt="ยำวุ้นเส้น">
+        <div class="card-body text-center">
+            <h5>ยำวุ้นเส้น</h5>
+            <div class="price">119 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ยำวุ้นเส้น',119)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food38.jpg" class="card-img-top" alt="ยำรวมมิตร">
+        <div class="card-body text-center">
+            <h5>ยำรวมมิตร</h5>
+            <div class="price">159 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ยำรวมมิตร',159)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food39.jpg" class="card-img-top" alt="ยำหมูยอ">
+        <div class="card-body text-center">
+            <h5>ยำหมูยอ</h5>
+            <div class="price">109 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ยำหมูยอ',109)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card position-relative">
+        <span class="badge badge-hot">แนะนำ</span>
+        <img src="images/food40.jpg" class="card-img-top" alt="กุ้งแช่น้ำปลา">
+        <div class="card-body text-center">
+            <h5>กุ้งแช่น้ำปลา</h5>
+            <div class="price">189 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('กุ้งแช่น้ำปลา',189)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+<!-- เมนูที่ 41 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food41.jpg" class="card-img-top" alt="ปลาหมึกย่าง">
+        <div class="card-body text-center">
+            <h5>ปลาหมึกย่าง</h5>
+            <div class="price">189 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ปลาหมึกย่าง',189)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card position-relative">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food42.jpg" class="card-img-top" alt="กุ้งเผา">
+        <div class="card-body text-center">
+            <h5>กุ้งเผา</h5>
+            <div class="price">299 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('กุ้งเผา',299)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food43.jpg" class="card-img-top" alt="หอยแครงลวก">
+        <div class="card-body text-center">
+            <h5>หอยแครงลวก</h5>
+            <div class="price">159 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('หอยแครงลวก',159)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food44.jpg" class="card-img-top" alt="หอยนางรมสด">
+        <div class="card-body text-center">
+            <h5>หอยนางรมสด</h5>
+            <div class="price">199 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('หอยนางรมสด',199)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- 45 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food45.jpg" class="card-img-top" alt="แหนมเอ็นไก่ทอด">
+        <div class="card-body text-center">
+            <h5>แหนมเอ็นไก่ทอด</h5>
+            <div class="price">129 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('แหนมเอ็นไก่ทอด',129)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food46.jpg" class="card-img-top" alt="นักเก็ตไก่">
+        <div class="card-body text-center">
+            <h5>นักเก็ตไก่</h5>
+            <div class="price">99 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('นักเก็ตไก่',99)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food47.jpg" class="card-img-top" alt="ไส้กรอกอีสาน">
+        <div class="card-body text-center">
+            <h5>ไส้กรอกอีสาน</h5>
+            <div class="price">109 บาท</div>
+           <button
+class="btn btn-warning"
+onclick="addCart('ไส้กรอกอีสาน',109)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <span class="badge badge-hot">ขายดี</span>
+        <img src="images/food48.jpg" class="card-img-top" alt="หมูมะนาว">
+        <div class="card-body text-center">
+            <h5>หมูมะนาว</h5>
+            <div class="price">149 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('หมูมะนาว',149)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- 49 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food49.jpg" class="card-img-top" alt="ปลาทอดน้ำปลา">
+        <div class="card-body text-center">
+            <h5>ปลาทอดน้ำปลา</h5>
+            <div class="price">259 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ปลาทอดน้ำปลา',259)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/food50.jpg" class="card-img-top" alt="ปลากะพงนึ่งมะนาว">
+        <div class="card-body text-center">
+            <h5>ปลากะพงนึ่งมะนาว</h5>
+            <div class="price">299 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ปลากะพงนึ่งมะนาว',299)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- เครื่องดื่ม -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card position-relative">
+        <span class="badge badge-hot bg-success">เครื่องดื่ม</span>
+        <img src="images/drink1.jpg" class="card-img-top" alt="โค้ก">
+        <div class="card-body text-center">
+            <h5>โค้ก</h5>
+            <div class="price">35 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('โค้ก',35)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/drink2.jpg" class="card-img-top" alt="น้ำเปล่า">
+        <div class="card-body text-center">
+            <h5>น้ำเปล่า</h5>
+            <div class="price">20 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('น้ำเปล่า',20)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/drink3.jpg" class="card-img-top" alt="น้ำแข็ง">
+        <div class="card-body text-center">
+            <h5>น้ำแข็ง</h5>
+            <div class="price">30 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('น้ำแข็ง',30)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/drink4.jpg" class="card-img-top" alt="โซดา">
+        <div class="card-body text-center">
+            <h5>โซดา</h5>
+            <div class="price">25 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('โซดา',25)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- 55 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/snack1.jpg" class="card-img-top" alt="ถั่วทอด">
+        <div class="card-body text-center">
+            <h5>ถั่วทอด</h5>
+            <div class="price">59 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ถั่วทอด',59)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/snack2.jpg" class="card-img-top" alt="เม็ดมะม่วงทอด">
+        <div class="card-body text-center">
+            <h5>เม็ดมะม่วงทอด</h5>
+            <div class="price">89 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('เม็ดมะม่วงทอด',89)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/snack3.jpg" class="card-img-top" alt="ปลาหมึกอบ">
+        <div class="card-body text-center">
+            <h5>ปลาหมึกอบ</h5>
+            <div class="price">119 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ปลาหมึกอบ',119)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/snack4.jpg" class="card-img-top" alt="ข้าวเกรียบทอด">
+        <div class="card-body text-center">
+            <h5>ข้าวเกรียบทอด</h5>
+            <div class="price">69 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ข้าวเกรียบทอด',69)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- 59 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card">
+        <img src="images/dessert1.jpg" class="card-img-top" alt="แตงโม">
+        <div class="card-body text-center">
+            <h5>แตงโม</h5>
+            <div class="price">79 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('แตงโม',79)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- 60 -->
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card food-card position-relative">
+        <span class="badge badge-hot bg-primary">แนะนำ</span>
+        <img src="images/dessert2.jpg" class="card-img-top" alt="ผลไม้รวม">
+        <div class="card-body text-center">
+            <h5>ผลไม้รวม</h5>
+            <div class="price">129 บาท</div>
+            <button
+class="btn btn-warning"
+onclick="addCart('ผลไม้รวม',129)">
+🛒 สั่งอาหาร
+</button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- ปุ่มเลื่อนขึ้นบน -->
+<button id="topBtn" class="btn btn-warning rounded-circle"
+style="position:fixed;bottom:20px;right:20px;width:55px;height:55px;display:none;z-index:999;">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <h4 class="mb-3">🍺 โรงเหล้ามหาสารคาม</h4>
+        <p>อาหารอร่อย • ดนตรีสดทุกคืน • บรรยากาศเป็นกันเอง</p>
+
+        <div class="my-3">
+            <a href="#" class="text-warning me-3 fs-4"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-warning me-3 fs-4"><i class="bi bi-line"></i></a>
+            <a href="#" class="text-warning me-3 fs-4"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-warning fs-4"><i class="bi bi-telephone-fill"></i></a>
+        </div>
+
+        <hr>
+
+        <p class="mb-0">
+            © 2026 โรงเหล้ามหาสารคาม | All Rights Reserved.
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+//==========================
+// ค้นหาเมนู
+//==========================
+
+const search=document.getElementById("search");
+
+search.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+let cards=document.querySelectorAll(".food-card");
+
+cards.forEach(function(card){
+
+let text=card.innerText.toLowerCase();
+
+card.parentElement.style.display=text.includes(value)
+? "block"
+: "none";
+
+});
+
+});
+
+//==========================
+// Scroll Top
+//==========================
+
+const topBtn=document.getElementById("topBtn");
+
+window.addEventListener("scroll",function(){
+
+if(window.scrollY>300){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
+
+});
+
+topBtn.onclick=function(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+//==========================
+// Hover Effect
+//==========================
+
+document.querySelectorAll(".food-card").forEach(function(card){
+
+card.addEventListener("mouseenter",function(){
+
+card.style.transform="translateY(-12px)";
+
+});
+
+card.addEventListener("mouseleave",function(){
+
+card.style.transform="translateY(0px)";
+
+});
+
+});
+
+//==========================
+// Category Button
+//==========================
+
+let buttons=document.querySelectorAll(".category button");
+
+buttons.forEach(function(btn){
+
+btn.addEventListener("click",function(){
+
+buttons.forEach(function(b){
+
+b.classList.remove("active");
+
+});
+
+this.classList.add("active");
+
+});
+
+});
+
+//==========================
+// ปุ่มสั่งอาหาร
+//==========================
+
+document.querySelectorAll(".btn-order").forEach(function(btn){
+
+btn.onclick=function(){
+
+let menu=this.parentElement.querySelector("h5").innerText;
+
+alert("✅ เพิ่ม '"+menu+"' ลงในรายการเรียบร้อย");
+
+};
+
+});
+
+//==========================
+// Animation ตอนเลื่อน
+//==========================
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity="1";
+
+entry.target.style.transform="translateY(0px)";
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".food-card").forEach(card=>{
+
+card.style.opacity="0";
+
+card.style.transform="translateY(40px)";
+
+card.style.transition=".6s";
+
+observer.observe(card);
+
+});
+
+</script>
+
+<div id="successOverlay" class="success-overlay">
+
+    <div class="success-circle">
+        ✓
+    </div>
+
+</div>
+
+<script>
+
+function showSuccess(){
+
+    const success = document.getElementById("successOverlay");
+
+    success.classList.add("show");
+
+    setTimeout(function(){
+
+        success.classList.remove("show");
+
+    },1000);
+
+}
+
+</script>
+</body>
+
+
+<script>
+
+function showSuccess(){
+
+    const success=document.getElementById("successOverlay");
+
+    success.classList.add("show");
+
+    setTimeout(function(){
+
+        success.classList.remove("show");
+
+    },1000);
+
+}
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addCart(name,price){
+
+    cart.push({
+        name:name,
+        price:price
+    });
+
+    localStorage.setItem("cart",JSON.stringify(cart));
+
+    showSuccess();
+
+}
+
+</script>
+
+</body>
+</html>
+</html>
